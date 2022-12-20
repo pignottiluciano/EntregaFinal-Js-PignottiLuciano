@@ -16,15 +16,15 @@ productos.forEach((producto) => {
   //Por cada elemento de mi array, creo un div
 
   boton.addEventListener('click', () => {
-      //esta funcion ejecuta que muestre si hay oferta
-      mostrarOferta(producto.id)
+    //esta funcion ejecuta que muestre si hay oferta
+    mostrarOferta(producto.id)
   })
 })
 
 //ordenar de A a Z
 let ordenMenor = document.getElementById('orden-menor');
 ordenMenor.addEventListener('click', () => {
-  const consulta = productos.sort( (a, b) => {
+  const consulta = productos.sort((a, b) => {
     if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) {
       return -1;
     }
@@ -39,7 +39,7 @@ ordenMenor.addEventListener('click', () => {
 //ordenar de Z a A
 let ordenMayor = document.getElementById('orden-mayor');
 ordenMayor.addEventListener('click', () => {
-  const consulta = productos.sort( (a, b) => {
+  const consulta = productos.sort((a, b) => {
     if (a.nombre.toLowerCase() > b.nombre.toLowerCase()) {
       return -1;
     }
@@ -53,11 +53,11 @@ ordenMayor.addEventListener('click', () => {
 })
 
 //muestra el descuento.
-let  mostrarOferta = (prodId) => {
-  let  item = productos.find((producto) => producto.id === prodId)
-  if (item.oferta){
-    console.log('El precio es = $' + item.precio + " pero tiene un descuento y su precio final es = $" + item.precio*0.8);
-  } 
+let mostrarOferta = (prodId) => {
+  let item = productos.find((producto) => producto.id === prodId)
+  if (item.oferta) {
+    console.log('El precio es = $' + item.precio + " pero tiene un descuento y su precio final es = $" + item.precio * 0.8);
+  }
   else {
     console.log('El precio final = $' + item.precio + " este articulo no tiene descuento");
   }
@@ -70,11 +70,11 @@ buscarProducto.addEventListener('click', () => {
   buscador(prodId);
 })
 
-let  buscador = (prodId) => {
-  let  item = productos.find((producto) => producto.id == prodId)
-  if (item.id){
+let buscador = (prodId) => {
+  let item = productos.find((producto) => producto.id == prodId)
+  if (item.id) {
     alert("El producto buscado es: " + item.nombre + " y su precio es= $" + item.precio);
-  } 
+  }
   else {
     alert("El producto buscado no existo");
   }
