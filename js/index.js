@@ -1,16 +1,36 @@
 let contenedorProductos = document.getElementById("contenedor-productos");
 
-const contenedorCarrito = document.getElementById("carrito-contenedor");
+let contenedorCarrito = document.getElementById("carrito-contenedor");
 
-const botonVaciar = document.getElementById("vaciar-carrito");
+let botonVaciar = document.getElementById("vaciar-carrito");
 
-const contadorCarrito = document.getElementById("contadorCarrito");
+let contadorCarrito = document.getElementById("contadorCarrito");
 
-const cantidad = document.getElementById("cantidad");
-const precioTotal = document.getElementById("precioTotal");
-const cantidadTotal = document.getElementById("cantidadTotal");
+let cantidad = document.getElementById("cantidad");
+let precioTotal = document.getElementById("precioTotal");
+let cantidadTotal = document.getElementById("cantidadTotal");
 
 let carrito = [];
+
+const jsonTiendaPath = "./js/tienda.json";
+let articulosJson;
+
+window.onload = function () {
+    //Cuando se cargue la pagina
+
+    fetch(jsonTiendaPath) //Obtenemos el json con la infomracion de la tienda
+        .then((Response) => Response.json())
+        .then((data) => {
+            articulosJson = data["productos"];
+
+            createList(articulosJson);
+        })
+        .catch(() => {
+            alert(
+                "¡Lo sentimos! Ha ocurrido un error. Por favor contactese con el administrador para más información."
+            );
+        });
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   if (localStorage.getItem("carrito")) {
@@ -44,17 +64,16 @@ let createList = (listCreate) => {
     });
     botonAgregar.addEventListener("click", () => {
       //esta funcion ejecuta que agregue el producto al carrito
-      console.log("apreto boton");
       agregarAlCarrito(producto.id);
     });
   });
 };
-createList(productos);
+// createList(productos);
 
 //ordenar de A a Z
 let ordenMenor = document.getElementById("orden-menor");
 ordenMenor.addEventListener("click", () => {
-  const consulta = productos.sort((a, b) => {
+  const consulta = articulosJson.sort((a, b) => {
     if (a.nombre.toLowerCase() < b.nombre.toLowerCase()) {
       return -1;
     }
@@ -64,7 +83,6 @@ ordenMenor.addEventListener("click", () => {
     return 0;
   });
 
-  console.log(consulta);
   cleanStock();
   createList(consulta);
 });
@@ -72,7 +90,7 @@ ordenMenor.addEventListener("click", () => {
 //ordenar de Z a A
 let ordenMayor = document.getElementById("orden-mayor");
 ordenMayor.addEventListener("click", () => {
-  lowerOrder(productos);
+  lowerOrder(articulosJson);
 });
 
 let lowerOrder = (product) => {
@@ -85,7 +103,6 @@ let lowerOrder = (product) => {
     }
     return 0;
   });
-  console.log(consulta);
   cleanStock();
   createList(consulta);
 };
@@ -97,7 +114,7 @@ let cleanStock = () => {
 
 //muestra el descuento.
 let mostrarOferta = (prodId) => {
-  let item = productos.find((producto) => producto.id === prodId);
+  let item = articulosJson.find((producto) => producto.id === prodId);
   if (item.oferta) {
     alert("El precio es $" + item.precio + " pero tiene un descuento y su precio final es $" + item.precio * 0.8);
   } else {
@@ -105,49 +122,42 @@ let mostrarOferta = (prodId) => {
   }
 };
 
-//Busqueda de producto por id
-let buscarProducto = document.getElementById("nav-search");
+//Busqueda de producto por nombre
+let buscarProducto = document.getElementById("buscar-producto");
 buscarProducto.addEventListener("click", () => {
-  let prodId = prompt("Ingrese ID del producto");
-  buscador(prodId);
+  let prodBuscar = prompt("Ingrese nombre del producto a buscar");
+  filtar(prodBuscar.toLocaleLowerCase());
 });
-
-let buscador = (prodId) => {
-  let item = productos.find((producto) => producto.id == prodId);
-  if (item && item.id) {
-    alert("El producto buscado es: " + item.nombre + " y su precio es= $" + item.precio);
-  } else {
-    alert("El producto buscado no existo");
+//Filtar producto
+const filtar = (prodBuscar)=>{
+  let list = [];
+  for(let producto of articulosJson){
+    let nombre = producto.nombre.toLowerCase();
+    if(nombre.indexOf(prodBuscar) !== -1){
+      list.push(producto);
+    }
   }
-};
-
-function actulizarSearchInput() {
-  const inputSearch = document.getElementById("nav__search");
-
-  if (localStorage.getItem("wordToSearch")) {
-    //guarda la palabra en el localstorage
-    inputSearch.value = localStorage.getItem("wordToSearch");
-  }
-  return;
+  cleanStock();
+  createList(list);
 }
 
-//AGREGAR AL CARRITO
+//Agregar al carrito
 const agregarAlCarrito = (prodId) => {
   const existe = carrito.some((prod) => prod.id === prodId); //comprobar si el elemento ya existe en el carro
 
   if (existe) {
-    //SI YA ESTÁ EN EL CARRITO, ACTUALIZAMOS LA CANTIDAD
+    //Si esta actualiza la cantidad
     const prod = carrito.map((prod) => {
       if (prod.id === prodId) {
         prod.cantidad++;
       }
     });
   } else {
-    //EN CASO DE QUE NO ESTÉ, AGREGAMOS EL CURSO AL CARRITO
-    const item = productos.find((prod) => prod.id === prodId);
+    //Si no esta se agrega
+    const item = articulosJson.find((prod) => prod.id === prodId);
     carrito.push(item);
   }
-  actualizarCarrito(); //MODIFICA EL CARRITO
+  actualizarCarrito(); //Modifico carrito
 };
 
 const eliminarDelCarrito = (prodId) => {
@@ -157,7 +167,17 @@ const eliminarDelCarrito = (prodId) => {
 
   carrito.splice(indice, 1);
   actualizarCarrito();
-  console.log(carrito);
+};
+
+const calPrecio = (prodId) => {
+  const item = carrito.find((prod) => prod.id === prodId);
+  let precio;
+  if (item.oferta) {
+    precio = item.precio * 0.8;
+  } else {
+    precio = item.precio;
+  }
+  return precio;
 };
 
 const actualizarCarrito = () => {
@@ -166,26 +186,32 @@ const actualizarCarrito = () => {
   //Por cada producto creamos un div
   carrito.forEach((prod) => {
     const div = document.createElement("div");
-    div.className = "productoEnCarrito";
+    div.className = "producto-en-carrito";
+    let precio;
+    if (prod.oferta) {
+      precio = prod.precio * 0.8;
+    } else {
+      precio = prod.precio;
+    }
     div.innerHTML = `
-      <p>${prod.nombre}</p>
-      <p>Precio:$${prod.precio}</p>
-      <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
-      <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+      <div>
+        <p>${prod.nombre}</p>
+        <p>Precio:$${precio}</p>
+        <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
+      </div>
+      <button onclick="eliminarDelCarrito(${prod.id})" class="boton-eliminar"><img src="./assets/logos/tacho.ico" alt=""></button>
       `;
 
     contenedorCarrito.appendChild(div);
-
-    localStorage.setItem("carrito", JSON.stringify(carrito));
   });
 
+  localStorage.setItem("carrito", JSON.stringify(carrito));
   contadorCarrito.innerText = carrito.length;
-  console.log(carrito);
-  precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0);
+  precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * calPrecio(prod.id), 0);
 };
 
 botonVaciar.addEventListener("click", () => {
-  carrito.length = 0;
+  carrito = [];
   actualizarCarrito();
 });
 

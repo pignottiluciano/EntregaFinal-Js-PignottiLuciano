@@ -10,6 +10,18 @@
   transition: all 0.5s;
   opacity: 0;
   visibility: hidden;
+  .producto-en-carrito {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #2b2461;
+    align-items: center;
+  }
+  .boton-eliminar {
+    width: 3vw;
+    height: 4vh;
+    background-color: transparent;
+    border: none;
+  }
 }
 
 .modal-active {
@@ -19,11 +31,15 @@
 
 .modal-carrito {
   position: relative;
-  background-color: white;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid #2b2461;
   min-width: 500px;
   padding: 20px;
   margin-top: -100%;
   transition: all 0.5s;
+  .carrito-button {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url("../assets/logos/logo.ico");
+  }
 }
 
 .modal-active .modal-carrito {
@@ -41,7 +57,7 @@
   font-size: 20px;
   color: royalblue;
   border: none;
-  background-color: white;
+  background-color: transparent;
 }
 .modal-carrito #carritoCerrar:hover {
   cursor: pointer;

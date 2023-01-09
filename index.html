@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/productos.js"></script>
     <script defer src="js/modal.js"></script>
-    <title>Document</title>
+    <title>Tienda</title>
   </head>
   <body class="container hero-color">
     <header>
@@ -32,17 +32,14 @@
           </li>
           <li class="nav-item">
             <a class="nav-link">
-              <button class="button" id="buscar-producto">Buscar un producto</button>
+              <button class="button" id="buscar-producto">Buscar</button>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link">
-              <button id="boton-carrito"><i class="fas fa-shopping-cart"></i><span id="contadorCarrito">0</span></button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">
-              <input type="text" id="nav-search" class="nav-search" placeholder="Buscar articulo" />
+              <button id="boton-carrito" class="boton-carrito">
+                <img class="logo" src="./assets/logos/logo.ico" alt="Logo de la pagina" /><span class="contador-carrito" id="contadorCarrito">0</span>
+              </button>
             </a>
           </li>
         </ul>
@@ -57,6 +54,7 @@
       </nav>
     </header>
     <main>
+      
       <section id="contenedor-productos"></section>
     </main>
     <footer>
@@ -65,16 +63,10 @@
     <div class="modal-contenedor">
       <div class="modal-carrito">
         <h3>Carrito</h3>
-        <button id="carritoCerrar"><i class="fas fa-times-circle"></i></button>
-        <div id="carrito-contenedor">
-          <!-- <div class="productoEnCarrito">
-                  <p>Buzo 1</p>
-                  <p>Precio: $1200</p>
-                  <button class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
-              </div> -->
-        </div>
+        <button id="carritoCerrar">X</button>
+        <div id="carrito-contenedor"></div>
         <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
-        <button id="vaciar-carrito" class="boton-agregar">Vaciar carrito</button>
+        <button id="vaciar-carrito" class="button">Vaciar carrito</button>
       </div>
     </div>
     <script src="js/index.js"></script>
