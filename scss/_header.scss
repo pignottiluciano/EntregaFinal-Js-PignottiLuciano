@@ -1,0 +1,75 @@
+header {
+  height: 7vh;
+  .nav {
+    --state-hamburguer: scale(0);
+    --state-close: scale(0);
+    --state-menu: translate(0);
+    display: grid;
+    justify-content: space-between;
+    align-items: center;
+    grid-template-columns: repeat(2, max-content);
+
+    &:target {
+      --state-menu: translate(0);
+      --state-close: scale(0);
+      --state-hamburguer: scale(0);
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      text-decoration: none;
+      color: $font-color;
+      h2 {
+        font-size: 1.5rem;
+        z-index: 1;
+      }
+      img {
+        height: 50px;
+        width: 50px;
+        z-index: 1;
+      }
+    }
+
+    .nav-hamburguer {
+      transform: var(--state-hamburguer);
+      .nav-icon {
+        width: 40px;
+      }
+    }
+
+    .nav-close {
+      transform: var(--state-close);
+      .nav-icon {
+        width: 40px;
+      }
+    }
+    .nav-links {
+      background-color: unset;
+      position: unset;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0;
+      display: grid;
+      align-content: center;
+      gap: 1.5em;
+      transform: unset;
+      grid-auto-flow: column;
+      transform: unset;
+      grid-column: -2/-1;
+      grid-row: 1/2;
+      .nav-item {
+        list-style: none;
+        .nav-link {
+          color: $font-color;
+          text-decoration: none;
+          font-size: 1rem;
+          letter-spacing: none;
+        }
+      }
+    }
+  }
+}

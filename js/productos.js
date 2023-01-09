@@ -109,8 +109,7 @@ let productos = [
   },
   {
     id: 13,
-    nombre:
-      "Auricular Bluetooth Edifier W820NB Grey HI-RES Audio Noise Cancelling",
+    nombre: "Auricular Bluetooth Edifier W820NB Grey HI-RES Audio Noise Cancelling",
     tipo: "Auriculares Inalambricos",
     cantidad: 1,
     precio: 38220,

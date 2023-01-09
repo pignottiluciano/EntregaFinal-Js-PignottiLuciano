@@ -1,0 +1,30 @@
+/* Body */
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+.container {
+  font-family: "Encode Sans Condensed", sans-serif;
+  color: $font-color;
+  display: grid;
+  height: 100%;
+  margin: 0 auto;
+  width: 95%;
+  display: grid;
+  &.hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
+      url("../assets/images/hero.webp");
+    background-size: cover;
+    height: 100%;
+    color: $font-color;
+  }
+  &.hero-color {
+    background: rgb(1, 0, 14);
+    background: linear-gradient(
+      180deg,
+      rgba(1, 0, 14, 1) 0%,
+      rgba(2, 2, 75, 1) 56%,
+      rgba(0, 38, 129, 1) 97%
+    );
+  }
+}

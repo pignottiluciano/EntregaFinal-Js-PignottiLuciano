@@ -1,0 +1,34 @@
+.btn-circular {
+  display: inline-block;
+  border: 2px solid white;
+  padding: 1rem 2rem;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: $btn-general;
+  transition: color 0.5s, background 0.5s;
+  margin: 30px;
+  margin-bottom: 15px;
+  font-size: 1em;
+  min-width: 140px;
+  text-align: center;
+  border-radius: 30px;
+  &:hover {
+    color: white;
+    background-color: transparent;
+  }
+  &:active {
+    box-shadow: inset 0 0 20px white;
+  }
+}
+
+.btn-send{
+    @extend .btn-circular;
+    background: $btn-send;
+}
+
+.btn-reset{
+    @extend .btn-circular;
+    background: $btn-reset;
+}

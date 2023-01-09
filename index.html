@@ -4,19 +4,79 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@300&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/productos.js"></script>
+    <script defer src="js/modal.js"></script>
     <title>Document</title>
   </head>
-  <body>
+  <body class="container hero-color">
     <header>
-      <h1 id="titulo" class="titulo">Practica CoderHouse</h1>
-      <button class="button" id="orden-menor">ordenar por nombre A a Z</button>
-      <button class="button" id="orden-mayor">ordenar por nombre Z a A</button>
-      <button class="button" id="buscar-producto">Buscar un producto</button>
+      <nav class="nav" id="nav">
+        <a href="./index.html" class="nav-logo">
+          <img class="logo" src="./assets/logos/logo.ico" alt="Logo de la pagina" />
+          <h2>Tienda</h2>
+        </a>
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a class="nav-link">
+              <button class="button" id="orden-menor">ordenar por nombre A a Z</button>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <button class="button" id="orden-mayor">ordenar por nombre Z a A</button>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <button class="button" id="buscar-producto">Buscar un producto</button>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <button id="boton-carrito"><i class="fas fa-shopping-cart"></i><span id="contadorCarrito">0</span></button>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <input type="text" id="nav-search" class="nav-search" placeholder="Buscar articulo" />
+            </a>
+          </li>
+        </ul>
+
+        <a href="#nav" class="nav-hamburguer">
+          <img src="./assets/logos/menu.svg" class="nav-icon" />
+        </a>
+
+        <a href="#" class="nav-close">
+          <img src="./assets/logos/close.svg" class="nav-icon" />
+        </a>
+      </nav>
     </header>
-    <main id="contenedor-productos"></main>
-    <footer></footer>
+    <main>
+      <section id="contenedor-productos"></section>
+    </main>
+    <footer>
+      <div class="footer-contact">contacto: <a>contacto@lucianopignotti.com</a></div>
+    </footer>
+    <div class="modal-contenedor">
+      <div class="modal-carrito">
+        <h3>Carrito</h3>
+        <button id="carritoCerrar"><i class="fas fa-times-circle"></i></button>
+        <div id="carrito-contenedor">
+          <!-- <div class="productoEnCarrito">
+                  <p>Buzo 1</p>
+                  <p>Precio: $1200</p>
+                  <button class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+              </div> -->
+        </div>
+        <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
+        <button id="vaciar-carrito" class="boton-agregar">Vaciar carrito</button>
+      </div>
+    </div>
     <script src="js/index.js"></script>
   </body>
 </html>
