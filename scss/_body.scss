@@ -5,26 +5,30 @@
 }
 .container {
   font-family: "Encode Sans Condensed", sans-serif;
-  color: $font-color;
+  color: black;
   display: grid;
   height: 100%;
   margin: 0 auto;
   width: 95%;
   display: grid;
-  &.hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
-      url("../assets/images/hero.webp");
-    background-size: cover;
-    height: 100%;
-    color: $font-color;
-  }
   &.hero-color {
-    background: rgb(1, 0, 14);
+    background: rgb(182, 182, 184);
     background: linear-gradient(
       180deg,
-      rgba(1, 0, 14, 1) 0%,
-      rgba(2, 2, 75, 1) 56%,
-      rgba(0, 38, 129, 1) 97%
+      rgb(137, 137, 139) 0%,
+      rgb(201, 201, 201) 56%,
+      rgb(255, 255, 255) 97%
     );
+    &.dark{
+      color: $font-color;
+      background: rgb(1, 0, 14);
+      background: linear-gradient(
+        180deg,
+        rgba(1, 0, 14, 1) 0%,
+        rgba(2, 2, 75, 1) 56%,
+        rgba(0, 38, 129, 1) 97%
+      );
+    }
+
   }
 }

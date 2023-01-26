@@ -7,9 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Encode+Sans+Condensed:wght@300&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/productos.js"></script>
-    <script defer src="js/modal.js"></script>
+    <!-- <script defer src="js/modal.js"></script> -->
     <title>Tienda</title>
   </head>
   <body class="container hero-color">
@@ -21,54 +23,105 @@
         </a>
         <ul class="nav-links">
           <li class="nav-item">
-            <a class="nav-link">
-              <button class="button" id="orden-menor">ordenar por nombre A a Z</button>
-            </a>
+            <a class="nav-link selected" id="nav-inicio">Inicio</a>
           </li>
+          <li class="nav-item"><a class="nav-link selected" id="nav-productos">productos</a></li>
           <li class="nav-item">
-            <a class="nav-link">
-              <button class="button" id="orden-mayor">ordenar por nombre Z a A</button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">
-              <button class="button" id="buscar-producto">Buscar</button>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">
-              <button id="boton-carrito" class="boton-carrito">
+            <a class="nav-link" id="nav-carrito">
+              <button class="boton-carrito">
                 <img class="logo" src="./assets/logos/logo.ico" alt="Logo de la pagina" /><span class="contador-carrito" id="contadorCarrito">0</span>
               </button>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <button class="switch" id="switch">
+                <span><i class="fas fa-sun"></i></span>
+                <span><i class="fas fa-moon"></i></span>
+              </button>
+            </a>
+          </li>
         </ul>
-
-        <a href="#nav" class="nav-hamburguer">
-          <img src="./assets/logos/menu.svg" class="nav-icon" />
-        </a>
-
-        <a href="#" class="nav-close">
-          <img src="./assets/logos/close.svg" class="nav-icon" />
-        </a>
       </nav>
     </header>
     <main>
-      
-      <section id="contenedor-productos"></section>
+      <section class="contenedor-inicio" id="contenedor-inicio">
+        <h1>Bienvenidos a la tienda</h1>
+        <!-- Slider main container -->
+        <div class="swiper">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper" id="item-swiper">
+            <!-- Slides -->
+            <div class="swiper-slide"><img src="./assets/images/home/01.jpg" alt="" /></div>
+            <div class="swiper-slide"><img src="./assets/images/home/02.jpg" alt="" /></div>
+            <div class="swiper-slide"><img src="./assets/images/home/03.jpg" alt="" /></div>
+            <div class="swiper-slide"><img src="./assets/images/home/04.jpg" alt="" /></div>
+            <div class="swiper-slide"><img src="./assets/images/home/05.jpg" alt="" /></div>
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination"></div>
+
+          <!-- If we need navigation buttons -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div>
+      </section>
+      <section id="contenedor-tienda">
+        <nav class="nav">
+          <ul class="nav-links">
+            <li class="nav-item">
+              <a class="nav-link">
+                <button class="button" id="orden-menor">ordenar por nombre A a Z</button>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">
+                <button class="button" id="orden-mayor">ordenar por nombre Z a A</button>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link">
+                <button class="button" id="buscar-producto">Buscar</button>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div id="contenedor-productos"></div>
+      </section>
+      <section id="contenedor-carrito" class="contenedor-carrito">
+        <h3>Carrito</h3>
+        <div id="carrito-contenedor"></div>
+        <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
+
+        <div id="email-pago">
+          <div class="inputEmail"><span id="">Ingrese email: </span> <input type="text" id="email-registro" /></div>
+        </div>
+        <div>
+          <button id="vaciar-carrito" class="button">Vaciar carrito</button>
+          <button id="boton-pagar" class="button">Pagar</button>
+        </div>
+      </section>
     </main>
     <footer>
       <div class="footer-contact">contacto: <a>contacto@lucianopignotti.com</a></div>
     </footer>
     <div class="modal-contenedor">
-      <div class="modal-carrito">
-        <h3>Carrito</h3>
-        <button id="carritoCerrar">X</button>
-        <div id="carrito-contenedor"></div>
-        <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
-        <button id="vaciar-carrito" class="button">Vaciar carrito</button>
+      <div class="modal-pago">
+        <div class="titulo-modal">
+          <h3>Carrito</h3>
+          <button id="cerrar-pago">X</button>
+        </div>
+
+        <p class="precioProducto">
+          Su pedido se hizo satifactoriamente. <br />
+          Se envian las intrucciones a seguir en el mail.
+        </p>
+        <a>
+          <button id="modal-cerrar" class="button">cerrar</button>
+        </a>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="js/index.js"></script>
   </body>
 </html>

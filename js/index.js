@@ -5,31 +5,32 @@ let contenedorCarrito = document.getElementById("carrito-contenedor");
 let botonVaciar = document.getElementById("vaciar-carrito");
 
 let contadorCarrito = document.getElementById("contadorCarrito");
+let contenedorInicio = document.getElementById("contenedor-inicio");
+let carritoContenedor = document.getElementById("contenedor-carrito");
+let contenedorTienda = document.getElementById("contenedor-tienda");
 
 let cantidad = document.getElementById("cantidad");
 let precioTotal = document.getElementById("precioTotal");
 let cantidadTotal = document.getElementById("cantidadTotal");
-
+let precioAPagar = 0;
 let carrito = [];
 
 const jsonTiendaPath = "./js/tienda.json";
 let articulosJson;
 
 window.onload = function () {
-    //Cuando se cargue la pagina
+  //Cuando se cargue la pagina
 
-    fetch(jsonTiendaPath) //Obtenemos el json con la infomracion de la tienda
-        .then((Response) => Response.json())
-        .then((data) => {
-            articulosJson = data["productos"];
+  fetch(jsonTiendaPath) //Obtenemos el json con la infomracion de la tienda
+    .then((Response) => Response.json())
+    .then((data) => {
+      articulosJson = data["productos"];
 
-            createList(articulosJson);
-        })
-        .catch(() => {
-            alert(
-                "¡Lo sentimos! Ha ocurrido un error. Por favor contactese con el administrador para más información."
-            );
-        });
+      createList(articulosJson);
+    })
+    .catch(() => {
+      alert("¡Lo sentimos! Ha ocurrido un error. Por favor contactese con el administrador para más información.");
+    });
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -69,6 +70,43 @@ let createList = (listCreate) => {
   });
 };
 // createList(productos);
+
+let navInicio = document.getElementById("nav-inicio");
+navInicio.addEventListener("click", () => {
+  contenedorInicio.classList.remove("hidden");
+  contenedorTienda.classList.add("hidden");
+  carritoContenedor.classList.add("hidden");
+  localStorage.setItem("page-set", "home");
+});
+let navProductos = document.getElementById("nav-productos");
+navProductos.addEventListener("click", () => {
+  contenedorTienda.classList.remove("hidden");
+  carritoContenedor.classList.add("hidden");
+  contenedorInicio.classList.add("hidden");
+  localStorage.setItem("page-set", "tienda");
+});
+
+let navCarrito = document.getElementById("nav-carrito");
+navCarrito.addEventListener("click", () => {
+  carritoContenedor.classList.remove("hidden");
+  contenedorTienda.classList.add("hidden");
+  contenedorInicio.classList.add("hidden");
+  localStorage.setItem("page-set", "carrito");
+});
+
+if (localStorage.getItem("page-set") === "tienda") {
+  contenedorTienda.classList.remove("hidden");
+  carritoContenedor.classList.toggle("hidden");
+  contenedorInicio.classList.toggle("hidden");
+} else if (localStorage.getItem("page-set") === "carrito") {
+  carritoContenedor.classList.remove("hidden");
+  contenedorTienda.classList.toggle("hidden");
+  contenedorInicio.classList.toggle("hidden");
+} else {
+  contenedorInicio.classList.remove("hidden");
+  contenedorTienda.classList.toggle("hidden");
+  carritoContenedor.classList.toggle("hidden");
+}
 
 //ordenar de A a Z
 let ordenMenor = document.getElementById("orden-menor");
@@ -129,41 +167,39 @@ buscarProducto.addEventListener("click", () => {
   filtar(prodBuscar.toLocaleLowerCase());
 });
 //Filtar producto
-const filtar = (prodBuscar)=>{
+const filtar = (prodBuscar) => {
   let list = [];
-  for(let producto of articulosJson){
+  for (let producto of articulosJson) {
     let nombre = producto.nombre.toLowerCase();
-    if(nombre.indexOf(prodBuscar) !== -1){
+    if (nombre.indexOf(prodBuscar) !== -1) {
       list.push(producto);
     }
   }
   cleanStock();
   createList(list);
-}
+};
 
 //Agregar al carrito
 const agregarAlCarrito = (prodId) => {
-  const existe = carrito.some((prod) => prod.id === prodId); //comprobar si el elemento ya existe en el carro
+  const existe = carrito.some((prod) => prod.id === prodId);
 
   if (existe) {
-    //Si esta actualiza la cantidad
     const prod = carrito.map((prod) => {
       if (prod.id === prodId) {
         prod.cantidad++;
       }
     });
   } else {
-    //Si no esta se agrega
     const item = articulosJson.find((prod) => prod.id === prodId);
     carrito.push(item);
   }
-  actualizarCarrito(); //Modifico carrito
+  actualizarCarrito();
 };
 
 const eliminarDelCarrito = (prodId) => {
   const item = carrito.find((prod) => prod.id === prodId);
 
-  const indice = carrito.indexOf(item); //Busca el elemento q yo le pase y nos devuelve su indice.
+  const indice = carrito.indexOf(item);
 
   carrito.splice(indice, 1);
   actualizarCarrito();
@@ -208,6 +244,7 @@ const actualizarCarrito = () => {
   localStorage.setItem("carrito", JSON.stringify(carrito));
   contadorCarrito.innerText = carrito.length;
   precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * calPrecio(prod.id), 0);
+  precioAPagar = carrito.reduce((acc, prod) => acc + prod.cantidad * calPrecio(prod.id), 0);
 };
 
 botonVaciar.addEventListener("click", () => {
@@ -215,100 +252,71 @@ botonVaciar.addEventListener("click", () => {
   actualizarCarrito();
 });
 
-// Codigo anterior, lo borrare para la entrega final.
+//Modo Dark
+let btnSwitch = document.getElementById("switch");
+btnSwitch.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  btnSwitch.classList.toggle("active");
 
-// let userLocal = "luciano@gmail.com";
-// let passwordLocal = "abc";
+  if (document.body.classList.contains("dark")) {
+    localStorage.setItem("dark-mode", "true");
+  } else {
+    localStorage.setItem("dark-mode", "false");
+  }
+});
 
-// function login() {
-//   let name = prompt("Ingresar tu nombre");
-//   let user = prompt("Ingresa tu usuario");
-//   let password = prompt("Ingresa tu contraseña");
-//   validarUsuario(user, password, name);
-// }
+if (localStorage.getItem("dark-mode") === "true") {
+  document.body.classList.add("dark");
+  btnSwitch.classList.add("active");
+} else {
+  document.body.classList.remove("dark");
+  btnSwitch.classList.remove("active");
+}
 
-// function validarUsuario(user, password, name) {
-//   console.log(userLocal, passwordLocal)
+//Carrusel
+const swiper = new Swiper(".swiper", {
+  // Optional parameters
+  direction: "horizontal",
+  loop: true,
 
-//   if (user != userLocal && password == passwordLocal) {
-//     alert("Su usuario es erróneo");
-//     return login();
-//   } else if (password != passwordLocal && user == userLocal) {
-//     alert("Su contraseña es errónea");
-//     return login();
-//   } else if (password != passwordLocal && user != userLocal) {
-//     alert("SU USUARIO Y CONTRASEÑA SON ERRÓNEOS");
-//     return login();
-//   } else if (password == passwordLocal && user == userLocal) {
-//     welcome(name);
-//   }
-// }
-// function welcome(name) {
-//   alert("Bienvenido " + name);
-//   validateEmail();
-//   validatePassword();
-// }
+  // If we need pagination
+  pagination: {
+    el: ".swiper-pagination",
+  },
 
-// function validatePassword() {
-//   if (passwordLocal.length < 8) {
-//     alert("Su contraseña es insegura.");
-//     let optionPass = 0;
-//     do {
-//       optionPass = prompt("desea ingresar una nueva contraseña? ingrese 1 para SI o 2 para NO");
-//     }
-//     while (optionPass != 1 && optionPass != 2);
-//     switch (optionPass) {
-//       case "1":
-//         changesPass();
-//         break;
-//       case "2":
-//         break;
-//     }
-//   }
-//   const regexPassword = /(?=.*\d)/;
-//   let passwordValidator = false;
-//   for (i = 0; i < passwordLocal.length; i++) {
-//     if (passwordLocal[i].match(regexPassword)) {
-//       passwordValidator = true
-//       break;
-//     }
-//   }
-//   if (!passwordValidator) {
-//     alert("La contraseña tiene que contener al menos un numero");
-//     changesPass();
-//   }
-// }
+  // Navigation arrows
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
 
-// function validateEmail() {
-//   let emailValidator = false;
-//   for (i = 0; i < userLocal.length; i++) {
-//     if (userLocal[i].match(/[@]/)) {
-//       alert("Es un mail válido");
-//       emailValidator = true;
-//       break;
-//     }
-//   }
-//   if (!emailValidator) {
-//     let optionEmail = 0;
-//     do {
-//       optionEmail = prompt("desea ingresar un mail nuevo? ingrese 1 para SI o 2 para NO");
-//     }
-//     while (optionPass != 1 && optionPass != 2);
-//     switch (optionEmail) {
-//       case "1":
-//         changesEmail();
-//         break;
-//       case "2":
-//         break;
-//     }
-//   }
-// }
+  // And if we need scrollbar
+  scrollbar: {
+    el: ".swiper-scrollbar",
+  },
+});
 
-// function changesEmail() {
-//   userLocal = prompt("Ingresar tu nuevo usuario");
-// }
+//modal
+const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
+const botonAbrir = document.getElementById('boton-pagar')
+const botonCerrar = document.getElementById('cerrar-pago')
+const botonSalir = document.getElementById('modal-cerrar')
+const modalActive = document.getElementsByClassName('modal-cerrar')[0]
 
-// function changesPass() {
-//   passwordLocal = prompt("ingrese nueva contraseña");
-//   validatePassword();
-// }
+
+botonAbrir.addEventListener('click', ()=>{
+  carrito = [];
+  actualizarCarrito();
+    contenedorModal.classList.toggle('modal-active')
+})
+botonCerrar.addEventListener('click', (event)=>{
+  contenedorModal.classList.remove("modal-active");
+})
+
+botonSalir.addEventListener('click', (event)=>{
+  contenedorModal.classList.toggle("modal-active");
+})
+contenedorModal.addEventListener('click', (event) =>{
+    contenedorModal.classList.toggle('modal-active')
+
+})
