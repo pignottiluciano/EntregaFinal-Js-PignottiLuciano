@@ -175,17 +175,20 @@ main {
   main .contenedor-carrito {
     display: flex;
     flex-direction: column;
-    align-items: center; }
-    main .contenedor-carrito div .producto-en-carrito {
-      display: flex;
-      justify-content: space-between;
-      border-bottom: 1px solid #2b2461;
-      align-items: center; }
-      main .contenedor-carrito div .producto-en-carrito .boton-eliminar {
-        width: 38px;
-        margin: 10px;
-        background-color: transparent;
-        border: none; }
+    align-items: center;
+    min-height: 65vh; }
+    main .contenedor-carrito div {
+      margin: 10px; }
+      main .contenedor-carrito div .producto-en-carrito {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #2b2461;
+        align-items: center; }
+        main .contenedor-carrito div .producto-en-carrito .boton-eliminar {
+          width: 38px;
+          margin: 10px;
+          background-color: transparent;
+          border: none; }
     main .contenedor-carrito .hidden {
       visibility: hidden;
       display: none !important; }
@@ -199,6 +202,75 @@ main {
       width: 85vw;
       height: 80vh; }
     main .contenedor-inicio .hidden {
+      visibility: hidden;
+      display: none !important; }
+  main .contenedor-section {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); }
+    main .contenedor-section .info-contact {
+      background: rgba(19, 19, 19, 0.705);
+      color: #f8f8f8;
+      padding: 2rem;
+      text-align: center;
+      grid-column: 3 / 4; }
+      main .contenedor-section .info-contact h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem; }
+      main .contenedor-section .info-contact ul {
+        margin-top: 4rem; }
+        main .contenedor-section .info-contact ul li {
+          margin-top: 0.5rem;
+          display: flex;
+          align-items: center; }
+          main .contenedor-section .info-contact ul li img {
+            background: #f8f8f8;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 100%;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: center;
+            margin-right: 0.5rem; }
+    main .contenedor-section .form-contact {
+      padding: 0 2rem;
+      background: rgba(58, 58, 58, 0.705);
+      grid-row: 1;
+      grid-column: 1 / 3; }
+      main .contenedor-section .form-contact h3 {
+        margin: 1.5rem 0 2rem 0;
+        font-size: 1.3rem;
+        color: #f8f8f8; }
+      main .contenedor-section .form-contact form {
+        display: grid;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(2, 1fr); }
+        main .contenedor-section .form-contact form p label {
+          font-weight: bold;
+          color: #f8f8f8;
+          line-height: 1.6; }
+        main .contenedor-section .form-contact form p input {
+          height: 2.5rem;
+          text-indent: 1em;
+          border: 0.5px solid #00000067;
+          width: 100%; }
+        main .contenedor-section .form-contact form p textarea {
+          height: 6rem;
+          padding: 1em;
+          border: 0.5px solid #00000067;
+          width: 100%; }
+        main .contenedor-section .form-contact form .full {
+          grid-column: 1 / 3; }
+        main .contenedor-section .form-contact form .form-btn {
+          text-align: center; }
+          main .contenedor-section .form-contact form .form-btn button {
+            padding: 0.75rem 0.75rem;
+            margin: 5px;
+            margin-bottom: 30px;
+            font-size: 1rem;
+            min-width: 100px; }
+    main .contenedor-section .hidden {
       visibility: hidden;
       display: none !important; }
   main.main-index {

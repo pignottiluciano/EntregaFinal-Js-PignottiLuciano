@@ -8,12 +8,14 @@ let contadorCarrito = document.getElementById("contadorCarrito");
 let contenedorInicio = document.getElementById("contenedor-inicio");
 let carritoContenedor = document.getElementById("contenedor-carrito");
 let contenedorTienda = document.getElementById("contenedor-tienda");
+let contenedorContacto = document.getElementById("contenedor-contacto");
 
 let cantidad = document.getElementById("cantidad");
 let precioTotal = document.getElementById("precioTotal");
 let cantidadTotal = document.getElementById("cantidadTotal");
 let precioAPagar = 0;
 let carrito = [];
+let email;
 
 const jsonTiendaPath = "./js/tienda.json";
 let articulosJson;
@@ -76,6 +78,7 @@ navInicio.addEventListener("click", () => {
   contenedorInicio.classList.remove("hidden");
   contenedorTienda.classList.add("hidden");
   carritoContenedor.classList.add("hidden");
+  contenedorContacto.classList.add("hidden");
   localStorage.setItem("page-set", "home");
 });
 let navProductos = document.getElementById("nav-productos");
@@ -83,6 +86,7 @@ navProductos.addEventListener("click", () => {
   contenedorTienda.classList.remove("hidden");
   carritoContenedor.classList.add("hidden");
   contenedorInicio.classList.add("hidden");
+  contenedorContacto.classList.add("hidden");
   localStorage.setItem("page-set", "tienda");
 });
 
@@ -91,21 +95,39 @@ navCarrito.addEventListener("click", () => {
   carritoContenedor.classList.remove("hidden");
   contenedorTienda.classList.add("hidden");
   contenedorInicio.classList.add("hidden");
+  contenedorContacto.classList.add("hidden");
   localStorage.setItem("page-set", "carrito");
+});
+
+let navContacto = document.getElementById("nav-contacto");
+navContacto.addEventListener("click", () => {
+  contenedorContacto.classList.remove("hidden");
+  carritoContenedor.classList.add("hidden");
+  contenedorTienda.classList.add("hidden");
+  contenedorInicio.classList.add("hidden");
+  localStorage.setItem("page-set", "contacto");
 });
 
 if (localStorage.getItem("page-set") === "tienda") {
   contenedorTienda.classList.remove("hidden");
   carritoContenedor.classList.toggle("hidden");
   contenedorInicio.classList.toggle("hidden");
+  contenedorContacto.classList.toggle("hidden");
 } else if (localStorage.getItem("page-set") === "carrito") {
   carritoContenedor.classList.remove("hidden");
   contenedorTienda.classList.toggle("hidden");
   contenedorInicio.classList.toggle("hidden");
+  contenedorContacto.classList.toggle("hidden");
+} else if (localStorage.getItem("page-set") === "contacto") {
+  contenedorContacto.classList.remove("hidden");
+  contenedorTienda.classList.toggle("hidden");
+  contenedorInicio.classList.toggle("hidden");
+  carritoContenedor.classList.toggle("hidden");
 } else {
   contenedorInicio.classList.remove("hidden");
   contenedorTienda.classList.toggle("hidden");
   carritoContenedor.classList.toggle("hidden");
+  contenedorContacto.classList.toggle("hidden");
 }
 
 //ordenar de A a Z
@@ -296,27 +318,65 @@ const swiper = new Swiper(".swiper", {
   },
 });
 
+
+function addData(){
+  email = document.getElementById('email-registro').value;
+  if(!carrito || carrito == [] || carrito.length < 1){
+    alert("El carrito esta vacio!")
+  } 
+  else if(ValidateEmail(email)){
+    document.getElementById("mostrar-usuario").innerHTML = `Hemos enviado un mail con los pasos a seguir a :<br>
+    <span style="color:white; font-size:40px"> ${email}</span>
+    <br>
+    <br>
+     Muchas gracias !
+    `;
+    carrito = [];
+    actualizarCarrito();
+    contenedorModal.classList.toggle('modal-active')
+  } else{
+    alert("Email invalido!")
+  }
+
+  
+}
+function ValidateEmail(input) {
+
+  var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  if (input != '' && input && input.match(validRegex)) {
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
+
+
 //modal
 const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
-const botonAbrir = document.getElementById('boton-pagar')
+// const botonAbrir = document.getElementById('boton-pagar')
 const botonCerrar = document.getElementById('cerrar-pago')
 const botonSalir = document.getElementById('modal-cerrar')
-const modalActive = document.getElementsByClassName('modal-cerrar')[0]
+const modalActive = document.getElementsByClassName('modal-pago')[0]
 
 
-botonAbrir.addEventListener('click', ()=>{
-  carrito = [];
-  actualizarCarrito();
+// botonAbrir.addEventListener('click', ()=>{
+//     addData()
+// })
+botonSalir.addEventListener('click', ()=>{
     contenedorModal.classList.toggle('modal-active')
 })
-botonCerrar.addEventListener('click', (event)=>{
-  contenedorModal.classList.remove("modal-active");
+botonCerrar.addEventListener('click', ()=>{
+    contenedorModal.classList.toggle('modal-active')
 })
 
-botonSalir.addEventListener('click', (event)=>{
-  contenedorModal.classList.toggle("modal-active");
-})
 contenedorModal.addEventListener('click', (event) =>{
     contenedorModal.classList.toggle('modal-active')
 
+})
+modalActive.addEventListener('click', (event) => {
+    event.stopPropagation() //cuando clickeo sobre el modal se finaliza la propagacion del click a los elementos
+    //padre
 })

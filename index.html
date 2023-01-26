@@ -26,6 +26,7 @@
             <a class="nav-link selected" id="nav-inicio">Inicio</a>
           </li>
           <li class="nav-item"><a class="nav-link selected" id="nav-productos">productos</a></li>
+          <li class="nav-item"><a class="nav-link selected" id="nav-contacto">contacto</a></li>
           <li class="nav-item">
             <a class="nav-link" id="nav-carrito">
               <button class="boton-carrito">
@@ -94,11 +95,47 @@
         <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
 
         <div id="email-pago">
-          <div class="inputEmail"><span id="">Ingrese email: </span> <input type="text" id="email-registro" /></div>
+          <div class="inputEmail"><span id="">Ingrese email: </span> <input type="text" class="email-registro" id="email-registro" /></div>
         </div>
         <div>
           <button id="vaciar-carrito" class="button">Vaciar carrito</button>
-          <button id="boton-pagar" class="button">Pagar</button>
+          <button onclick="addData()" class="button">Pagar</button>
+        </div>
+      </section>
+      <section id="contenedor-contacto" class="contenedor-section">
+        <div class="info-contact">
+          <h3>Mis Datos</h3>
+          <ul>
+            <li><img src="./assets/logos/phone.png" alt="Logo phone"></i> +54 3XXX-XXXXXX</li>
+            <li><img src="./assets/logos/email.png" alt="Logo mail"> luchopignotti@gmail.com</li>
+            <li><img src="./assets/logos/direccion.png" alt="Logo direccion"></i> Rosario, Argentina</li>
+          </ul>
+        </div>
+
+        <div class="form-contact">
+          <h3>Contactate</h3>
+          <form>
+            <p>
+              <label for="name">Nombre</label>
+              <input type="text" name="name" placeholder="Nombre..." required>
+            </p>
+            <p>
+              <label for="Last-name">Apellido</label>
+              <input type="text" name="last-name" placeholder="Apellido..." required>
+            </p>
+            <p class="full">
+              <label for="email">Email</label>
+              <input type="email" name="email" placeholder="Email..." required>
+            </p>
+            <p class="full">
+              <label for="message">Mensaje</label>
+              <textarea name="message" required></textarea>
+            </p>
+            <p class="full form-btn">
+              <button class="btn-circular btn-send" type="submit">Enviar</button>
+              <button class="btn-circular btn-reset" type="reset">Limpiar</button>
+            </p>
+          </form>
         </div>
       </section>
     </main>
@@ -111,11 +148,7 @@
           <h3>Carrito</h3>
           <button id="cerrar-pago">X</button>
         </div>
-
-        <p class="precioProducto">
-          Su pedido se hizo satifactoriamente. <br />
-          Se envian las intrucciones a seguir en el mail.
-        </p>
+        <p id="mostrar-usuario"></p>
         <a>
           <button id="modal-cerrar" class="button">cerrar</button>
         </a>
