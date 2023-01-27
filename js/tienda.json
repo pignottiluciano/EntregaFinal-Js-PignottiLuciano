@@ -7,7 +7,7 @@
       "cantidad": 1,
       "precio": 211120,
       "oferta": true,
-      "img": "../assets/images/auriculares/air-max.jpg"
+      "img": "./assets/images/auriculares/air-max.jpg"
     },
     {
       "id": 2,
@@ -16,7 +16,7 @@
       "cantidad": 1,
       "precio": 12922,
       "oferta": false,
-      "img": "../assets/images/auriculares/lenovolp75.jpg"
+      "img": "./assets/images/auriculares/lenovolp75.jpg"
     },
     {
       "id": 3,
@@ -25,7 +25,7 @@
       "cantidad": 1,
       "precio": 21658,
       "oferta": false,
-      "img": "../assets/images/auriculares/sony-wf.jpg"
+      "img": "./assets/images/auriculares/sony-wf.jpg"
     },
     {
       "id": 4,
@@ -34,7 +34,7 @@
       "cantidad": 1,
       "precio": 47320,
       "oferta": false,
-      "img": "../assets/images/auriculares/anker-soundcore.jpg"
+      "img": "./assets/images/auriculares/anker-soundcore.jpg"
     },
     {
       "id": 5,
@@ -43,7 +43,7 @@
       "cantidad": 1,
       "precio": 3185,
       "oferta": false,
-      "img": "../assets/images/auriculares/jblc50.jpg"
+      "img": "./assets/images/auriculares/jblc50.jpg"
     },
     {
       "id": 6,
@@ -52,7 +52,7 @@
       "cantidad": 1,
       "precio": 5851,
       "oferta": false,
-      "img": "../assets/images/auriculares/sonycable.jpg"
+      "img": "./assets/images/auriculares/sonycable.jpg"
     },
     {
       "id": 7,
@@ -61,7 +61,7 @@
       "cantidad": 1,
       "precio": 2912,
       "oferta": false,
-      "img": "../assets/images/auriculares/sonycable2.jpg"
+      "img": "./assets/images/auriculares/sonycable2.jpg"
     },
     {
       "id": 8,
@@ -70,7 +70,7 @@
       "cantidad": 1,
       "precio": 32760,
       "oferta": false,
-      "img": "../assets/images/auriculares/sonyprof.jpg"
+      "img": "./assets/images/auriculares/sonyprof.jpg"
     },
     {
       "id": 9,
@@ -79,7 +79,7 @@
       "cantidad": 1,
       "precio": 22386,
       "oferta": false,
-      "img": "../assets/images/auriculares/sonyprof2.jpg"
+      "img": "./assets/images/auriculares/sonyprof2.jpg"
     },
     {
       "id": 10,
@@ -88,7 +88,7 @@
       "cantidad": 1,
       "precio": 194740,
       "oferta": false,
-      "img": "../assets/images/auriculares/barra1.jpg"
+      "img": "./assets/images/auriculares/barra1.jpg"
     },
     {
       "id": 11,
@@ -97,7 +97,7 @@
       "cantidad": 1,
       "precio": 119210,
       "oferta": false,
-      "img": "../assets/images/auriculares/barra3.jpg"
+      "img": "./assets/images/auriculares/barra3.jpg"
     },
     {
       "id": 12,
@@ -106,7 +106,7 @@
       "cantidad": 1,
       "precio": 10992,
       "oferta": true,
-      "img": "../assets/images/auriculares/barra2.jpg"
+      "img": "./assets/images/auriculares/barra2.jpg"
     },
     {
       "id": 13,
@@ -115,7 +115,7 @@
       "cantidad": 1,
       "precio": 38220,
       "oferta": false,
-      "img": "../assets/images/auriculares/edifierw82.jpg"
+      "img": "./assets/images/auriculares/edifierw82.jpg"
     },
     {
       "id": 14,
@@ -124,7 +124,7 @@
       "cantidad": 1,
       "precio": 28210,
       "oferta": false,
-      "img": "../assets/images/auriculares/redmi1.jpg"
+      "img": "./assets/images/auriculares/redmi1.jpg"
     },
     {
       "id": 15,
@@ -133,7 +133,7 @@
       "cantidad": 1,
       "precio": 114114,
       "oferta": true,
-      "img": "../assets/images/auriculares/AirPods.jpg"
+      "img": "./assets/images/auriculares/AirPods.jpg"
     },
     {
       "id": 16,
@@ -142,7 +142,7 @@
       "cantidad": 1,
       "precio": 10010,
       "oferta": false,
-      "img": "../assets/images/auriculares/jblauris.jpg"
+      "img": "./assets/images/auriculares/jblauris.jpg"
     }
   ]
 }
